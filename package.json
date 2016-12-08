@@ -15,6 +15,10 @@
     "boilerplate",
     "express"
   ],
+  "scripts": {
+    "start": "node server.js",
+    "debug": "DEBUG=express:* node server.js"
+  },
   "dependencies" : {
     "express": "2.5.7",
     "jade": ">= 0.0.1"
