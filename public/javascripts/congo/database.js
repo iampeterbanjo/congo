@@ -2,7 +2,8 @@ Congo.DatabaseView = Backbone.View.extend({
 	tagName: 'tr',
 	
 	events: {
-		'click a': 'sayHello'
+		'click a': 'sayHello',
+		'click button': 'sayHello'
 	},
 
 	sayHello: function() {
@@ -10,7 +11,10 @@ Congo.DatabaseView = Backbone.View.extend({
 	},
 	
 	render: function() {
-		$(this.el).html('<td><a href="#">DB Name</a></td>');
+		var template = $('#database-list-template').html();
+		var compiled = _.template(template, {name: "Templated name"});
+
+		$(this.el).html(compiled);
 
 		return this;
 	}
@@ -18,7 +22,7 @@ Congo.DatabaseView = Backbone.View.extend({
 
 Congo.DatabaseListView = Backbone.View.extend({
 	tagName: 'table',
-	className: 'table table-stripped',
+	className: 'table table-striped',
 	render: function() {
 		var els = [];
 
