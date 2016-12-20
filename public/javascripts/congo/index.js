@@ -1,17 +1,22 @@
 var Congo = {
 	init: function() {
-		var crumbView = new Congo.BreadcrumbView({
+		// data
+		Congo.databases = new Congo.DatabaseCollection();
+
+		// views
+		Congo.breadcrumbs = new Congo.BreadcrumbView({
 			el: '#breadcrumbs'
 		});
-		crumbView.render();
+		
+		Congo.databaseList = new Congo.DatabaseListView({
+			collection: Congo.databases
+		});
 
-		var dbs = new Congo.Databases();
-		var databaseList = new Congo.DatabaseListView({
-			collection: dbs
-		});
-		databaseList.render();
-		dbs.fetch().fail(function(collection, error) {
-			console.warn('Error: %s', error);
-		});
+		// go
+		this.start();
+	},
+
+	start: function() {
+		Congo.databases.fetch();
 	}
 };

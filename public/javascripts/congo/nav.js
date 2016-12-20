@@ -1,4 +1,8 @@
 Congo.BreadcrumbView = Backbone.View.extend({
+	initialize: function() {
+		this.render();
+	},
+
 	events: {
 		'click a': 'sayHello'
 	},

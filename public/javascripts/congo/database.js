@@ -2,7 +2,7 @@ Congo.Database = Backbone.Model.extend({
 
 });
 
-Congo.Databases = Backbone.Collection.extend({
+Congo.DatabaseCollection = Backbone.Collection.extend({
 	model: Congo.Database,
 	url: '/mongo-api/dbs'
 });
@@ -37,6 +37,8 @@ Congo.DatabaseListView = Backbone.View.extend({
 		this.collection.bind('reset', this.render, this);
 		this.collection.bind('add', this.render, this);
 		this.collection.bind('remove', this.render, this);
+
+		this.render();
 	},
 
 	render: function() {
