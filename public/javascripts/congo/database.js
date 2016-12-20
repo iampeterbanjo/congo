@@ -32,6 +32,13 @@ Congo.DatabaseView = Backbone.View.extend({
 Congo.DatabaseListView = Backbone.View.extend({
 	tagName: 'table',
 	className: 'table table-striped',
+
+	initialize: function() {
+		this.collection.bind('reset', this.render, this);
+		this.collection.bind('add', this.render, this);
+		this.collection.bind('remove', this.render, this);
+	},
+
 	render: function() {
 		var els = [];
 
