@@ -1,10 +1,43 @@
 Congo.Database = Backbone.Model.extend({
-
+	url: function() {
+		return '/mongo-api/dbs/' + this.id;
+	},
+	idAttribute: 'name'
 });
 
 Congo.DatabaseCollection = Backbone.Collection.extend({
 	model: Congo.Database,
 	url: '/mongo-api/dbs'
+});
+
+Congo.DatabaseOptionView = Backbone.View.extend({
+	initialize: function() {
+		this.render();
+	},
+
+	events: {
+		'submit form': 'addDb'
+	},
+
+	addDb: function(event) {
+		event.preventDefault();
+
+		var newDbName = $('#newDb').val();
+		var model = new Congo.Database({
+			name: newDbName
+		});
+		model.save();
+		Congo.databases.add(model);
+		$('#newDb').val('');
+	},
+
+	render: function() {
+		var source = $('#new-db-template').html();
+		var compiled = _.template(source);
+		this.$el.html(compiled);
+
+		return this;
+	}
 });
 
 Congo.DatabaseView = Backbone.View.extend({
@@ -22,8 +55,7 @@ Congo.DatabaseView = Backbone.View.extend({
 	render: function() {
 		var template = $('#database-list-template').html();
 		var compiled = _.template(template, this.model.toJSON());
-
-		$(this.el).html(compiled);
+		this.$el.html(compiled);
 
 		return this;
 	}
@@ -39,6 +71,13 @@ Congo.DatabaseListView = Backbone.View.extend({
 		this.collection.bind('remove', this.render, this);
 
 		this.render();
+		this.renderOptionView();
+	},
+
+	renderOptionView: function() {
+		this.optionView = new Congo.DatabaseOptionView({
+			el: '#db-options'
+		});
 	},
 
 	render: function() {
@@ -50,7 +89,7 @@ Congo.DatabaseListView = Backbone.View.extend({
 			}).render().el);
 		});
 
-		$(this.el).html(els);
-		$('#database-list').html(this.el);
+		this.$el.html(els);
+		$('#database-list').append(this.el);
 	}
 });

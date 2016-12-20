@@ -2,13 +2,26 @@
 	ul#breadcrumbs.breadcrumb.span12
 
 .row
-	#database-list.span12
+	#database-list.span9
+	#db-options.span3
+
+script#new-db-template(type="text/backbone")
+	form#addDb
+		input(id='newDb', type='text')
+		button.btn(type='submit')
+			i.icon.icon-plus-sign
+			| Add Db
 
 script#database-list-template(type="text/backbone")
+	td(width=60, style='vertical-align: middle')
+		i.icon.icon-hdd
 	td
-		a(href="#")<%=name%>
+		h4
+			a(href="#")<%=name%>
 	td
-		button.btn.btn-info Click me
+		button.btn.delete-collection
+			i.icon.icon-remove
+			| delete
 
 script(src="/javascripts/congo/index.js")
 script(src="/javascripts/congo/nav.js")
