@@ -21,7 +21,7 @@ Congo.DatabaseView = Backbone.View.extend({
 	
 	render: function() {
 		var template = $('#database-list-template').html();
-		var compiled = _.template(template, this.model);
+		var compiled = _.template(template, this.model.toJSON());
 
 		$(this.el).html(compiled);
 
@@ -33,18 +33,15 @@ Congo.DatabaseListView = Backbone.View.extend({
 	tagName: 'table',
 	className: 'table table-striped',
 	render: function() {
-		var dbs = new Congo.Databases();
-		dbs.fetch().then(function(models) {
-			var els = [];
+		var els = [];
 
-			models.forEach(function(model) {
-				els.push(new Congo.DatabaseView({
-					model: model
-				}).render().el);
-			});
+		this.collection.each(function(model) {
+			els.push(new Congo.DatabaseView({
+				model: model
+			}).render().el);
+		});
 
-			$(this.el).html(els);
-			$('#database-list').html(this.el);
-		}.bind(this));
+		$(this.el).html(els);
+		$('#database-list').html(this.el);
 	}
 });

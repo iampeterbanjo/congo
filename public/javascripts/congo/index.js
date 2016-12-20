@@ -5,7 +5,14 @@ var Congo = {
 		});
 		crumbView.render();
 
-		var databaseList = new Congo.DatabaseListView();
-		databaseList.render();
+		var dbs = new Congo.Databases();
+		dbs.fetch().then(function(collection, response, options) {
+			var databaseList = new Congo.DatabaseListView({
+				collection: dbs
+			});
+			databaseList.render();
+		}).fail(function(collection, error) {
+			console.warn('Error: %s', error);
+		});
 	}
 };
