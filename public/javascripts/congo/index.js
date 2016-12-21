@@ -5,11 +5,11 @@ var Congo = {
 
 		// views
 		Congo.breadcrumbs = new Congo.BreadcrumbView({
-			el: '#breadcrumbs'
+			el: '#nav'
 		});
-		
-		Congo.databaseList = new Congo.DatabaseListView({
-			collection: Congo.databases
+
+		Congo.Details = new Congo.DetailsView({
+			el: '#details'
 		});
 
 		// go
