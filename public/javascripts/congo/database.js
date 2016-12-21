@@ -44,12 +44,15 @@ Congo.DatabaseView = Backbone.View.extend({
 	tagName: 'tr',
 	
 	events: {
-		'click a': 'sayHello',
-		'click button': 'sayHello'
+		'click button': 'removeDb'
 	},
 
-	sayHello: function() {
-		alert('Row says hello');
+	removeDb: function() {
+		var ok = confirm('Are you sure you want to delete ' + this.model.get('name') + '?');
+		if (ok) {
+			this.model.destroy();
+			Congo.databases.remove(this.model);
+		}
 	},
 	
 	render: function() {
