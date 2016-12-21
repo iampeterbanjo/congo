@@ -2,6 +2,13 @@ Congo.Database = Backbone.Model.extend({
 	url: function() {
 		return '/mongo-api/dbs/' + this.id;
 	},
+
+	validate: function(attrs) {
+		if (_.isEmpty(attrs.name)) {
+			return 'Name required';
+		}
+	},
+
 	idAttribute: 'name'
 });
 
