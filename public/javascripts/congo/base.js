@@ -43,7 +43,7 @@ Congo.DetailsView = Backbone.View.extend({
 	},
 
 	render: function() {
-		var source = $('#db-details-template').html();
+		var source = $(this.options.template).html();
 		var compiled = _.template(source);
 		this.$el.html(compiled);
 

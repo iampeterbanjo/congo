@@ -9,7 +9,8 @@ var Congo = {
 		});
 
 		Congo.Details = new Congo.DetailsView({
-			el: '#details'
+			el: '#details',
+			template: '#database-details-template'
 		});
 
 		// go
