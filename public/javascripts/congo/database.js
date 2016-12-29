@@ -61,3 +61,22 @@ Congo.DatabaseListView = Congo.ListView.extend({
 
 	ItemView: Congo.DatabaseView
 });
+
+Congo.DatabaseLayoutView = Congo.LayoutView.extend({
+	template: '#database-details-template',
+
+	regions: {
+		databaseList: '#database-list',
+		databaseOptions: '#database-options' 
+	},
+
+	layoutReady: function() {
+		var databaseListView = new Congo.DatabaseListView({
+			collection: this.collection
+		});
+		var optionView = new Congo.DatabaseOptionView();
+
+		this.databaseList.append(databaseListView.render().el);
+		this.databaseOptions.append(optionView.render().el);
+	}
+});

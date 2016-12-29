@@ -37,29 +37,21 @@ Congo.View = Backbone.View.extend({
 	}
 });
 
-Congo.DetailsView = Backbone.View.extend({
-	initialize: function() {
-		this.render();
-	},
-
+Congo.LayoutView = Backbone.View.extend({
 	render: function() {
-		var source = $(this.options.template).html();
+		var source = $(this.template).html();
 		var compiled = _.template(source);
 		this.$el.html(compiled);
 
-		var listView = new Congo.DatabaseListView({
-			collection: Congo.databases
-		});
-		var optionView = new Congo.DatabaseOptionView();
+		// loop over regions and make them available on this
+		_.each(this.regions, function(selector, name) {
+			this[name] = this.$(selector);
+		}.bind(this));
 
-		var $databaseList = this.$('#database-list');
-		var $databaseOption = this.$('#database-options');
-
-		$databaseList.append(listView.render().el);
-		$databaseOption.append(optionView.render().el);
-
-		this.$el.append($databaseList);
-		this.$el.append($databaseOption);
+		// emit an event to say that regions are ready
+		if (this.layoutReady) {
+			this.layoutReady();
+		}
 
 		return this;
 	}

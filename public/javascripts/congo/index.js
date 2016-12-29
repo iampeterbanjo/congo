@@ -8,16 +8,20 @@ var Congo = {
 			el: '#nav'
 		});
 
-		Congo.Details = new Congo.DetailsView({
-			el: '#details',
-			template: '#database-details-template'
-		});
-
 		// go
 		this.start();
 	},
 
-	start: function() {
+	showDatabases: function() {
+		var databaseLayout = new Congo.DatabaseLayoutView({
+			collection: Congo.databases
+		});
+
+		$('#details').append(databaseLayout.render().el);
 		Congo.databases.fetch();
+	},
+
+	start: function() {
+		this.showDatabases();
 	}
 };
