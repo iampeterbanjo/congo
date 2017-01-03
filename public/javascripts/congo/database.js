@@ -37,22 +37,14 @@ Congo.DatabaseOptionView = Congo.View.extend({
 	}
 });
 
-Congo.DatabaseView = Congo.View.extend({
+Congo.DatabaseView = Congo.ItemView.extend({
 	tagName: 'tr',
 	
 	events: {
-		'click button': 'removeDb'
+		'click button': 'remove'
 	},
 
-	template: '#database-list-template',
-
-	removeDb: function() {
-		var ok = confirm('Are you sure you want to delete ' + this.model.get('name') + '?');
-		if (ok) {
-			this.model.destroy();
-			Congo.databases.remove(this.model);
-		}
-	}
+	template: '#database-list-template'
 });
 
 Congo.DatabaseListView = Congo.ListView.extend({

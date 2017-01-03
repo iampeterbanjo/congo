@@ -1,3 +1,27 @@
+Congo.View = Backbone.View.extend({
+	initialize: function() {
+		this.render();
+	},
+
+	render: function() {
+		var data = this.model ? this.model.toJSON() : {};
+		var source = $(this.template).html();
+		var compiled = _.template(source, data);
+		this.$el.html(compiled);
+
+		return this;
+	}
+});
+
+Congo.ItemView = Congo.View.extend({
+	remove: function () {
+		var confirmed = confirm("Delete this? You sure?");
+		if (confirmed) {
+			this.model.destroy();
+		}
+	}
+});
+
 Congo.ListView = Backbone.View.extend({
 	initialize: function() {
 		this.collection.bind('reset', this.render, this);
@@ -18,21 +42,6 @@ Congo.ListView = Backbone.View.extend({
 		});
 
 		this.$el.html(els);
-		return this;
-	}
-});
-
-Congo.View = Backbone.View.extend({
-	initialize: function() {
-		this.render();
-	},
-
-	render: function() {
-		var data = this.model ? this.model.toJSON() : {};
-		var source = $(this.template).html();
-		var compiled = _.template(source, data);
-		this.$el.html(compiled);
-
 		return this;
 	}
 });
