@@ -50,7 +50,7 @@ Congo.CollectionOptionView = Congo.View.extend({
 	}
 });
 
-Congo.CollectionLayoutView = Congo.Layout.extend({
+Congo.CollectionLayoutView = Congo.LayoutView.extend({
 	template: "#collection-details-template",
 	regions: {
 		collectionList: "#collection-list",

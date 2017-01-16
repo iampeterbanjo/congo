@@ -41,7 +41,15 @@ Congo.DatabaseView = Congo.ItemView.extend({
 	tagName: 'tr',
 	
 	events: {
-		'click button': 'remove'
+		'click button': 'remove',
+		'click a': 'showDb'
+	},
+
+	showDb: function(event) {
+		event.preventDefault();
+
+		var db = event.target.text;
+		Congo.router.navigate(db, true);
 	},
 
 	template: '#database-list-template'

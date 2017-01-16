@@ -1,38 +1,63 @@
 #app.row
-	.span12
-		ul#nav.breadcrumb.span12
+  .span12
+    ul#nav.breadcrumb
 
-	.row
-		#details.span12
+  #details
+
+script#collection-details-template(type="text/backbone")
+  .row
+    .span12
+      #collection-list.span8
+      #collection-options.span3
 
 script#database-details-template(type="text/backbone")
-	#database-list.span9
-	#database-options.span3
+  .row
+    .span12
+      #database-list.span8
+      #database-options.span3
 
 script#new-db-template(type="text/backbone")
-	form#addDb
-		input(id='newDb', type='text')
-		button.btn(type='submit')
-			i.icon.icon-plus-sign
-			| Add Db
+  form#addDb
+    input(id='newDb', type="text")
+    button.btn(type="submit")
+      i.icon.icon-plus-sign
+      | Add 
+
+script#new-collection-template(type="text/backbone")
+  form#addCollection
+    input(id='newCollection', type="text")
+    button.btn(type="submit")
+      i.icon.icon-plus-sign
+      | Add
+
+script#collection-list-template(type="text/backbone")
+    td(width=60)
+      img(src="/img/collections.png", style="height:24px")
+    td
+      h4
+        a(href="#", data-collection!='<%=name%>') <%=name%>
+    td
+      button.btn
+        i.icon.icon-remove
+        | delete
 
 script#database-list-template(type="text/backbone")
-	td(width=60, style='vertical-align: middle')
-		i.icon.icon-hdd
-	td
-		h4
-			a(href="#")<%=name%>
-	td
-		button.btn.delete-collection
-			i.icon.icon-remove
-			| delete
+    td(width=60)
+      img(src="/img/database.png", style="height:24px")
+    td
+      h4
+        a(href="#", data-db!='<%=name%>') <%=name%>
+    td
+      button.btn
+        i.icon.icon-remove
+        | delete
 
 script(src="/javascripts/congo/index.js")
 script(src="/javascripts/congo/base.js")
 script(src="/javascripts/congo/nav.js")
 script(src="/javascripts/congo/database.js")
-
+script(src="/javascripts/congo/collections.js")
 script
-	$(function() {
-		Congo.init();
-	});
+  $(function(){
+    Congo.start();
+  })
